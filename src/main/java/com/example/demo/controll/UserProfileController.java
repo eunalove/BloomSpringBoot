@@ -26,18 +26,6 @@ public class UserProfileController {
         //생성자를 통해 mapper를 받음
         this.mapper = mapper;
     }
-    /*
-    @PostConstruct
-    //스프링 프레임워크가 UserProfileController라는 인스턴스를 만들고
-    //그 직후에 호출하게 되므로 초기화해야할 데이터들을 초기화할 수 있음
-    public void init(){
-        userMap = new HashMap<String, UserProfile>();
-        userMap.put("1", new UserProfile("1", "홍길동", "111-1111", "서울시 강남구 대치1동"));
-        userMap.put("2", new UserProfile("2", "홍길자", "222-2222", "서울시 강남구 대치2동"));
-        userMap.put("3", new UserProfile("3", "홍길순", "333-3333", "서울시 강남구 대치3동"));
-
-    }
-    */
 
     @GetMapping("/user/{id}")
     //id를 인자로 받아서 해당 UserProfile의 정보를 JSON형태로 전달하는 API생성
@@ -75,24 +63,19 @@ public class UserProfileController {
         //일반적인 경우에는 파라메타를 전달할 땐 RequestParam을 이용하는 것이 일반적이다.
 
         UserProfile userProfile =new UserProfile(id,name,phone,address);
-        //userMap.put(id, userProfile);
-        mapper.insertUserProfile(id,name, phone, address);
+
+        mapper.updateUserProfile(id,name, phone, address);
 
     }
 
     @PostMapping("/user/{id}")
-    //PUT이 생성이고 POST가 수정이지
+
     public void postUserProfile(@PathVariable("id") String id, @RequestParam("name") String name,@RequestParam("phone") String phone,@RequestParam("address") String address) {
-       /* UserProfile userProfile = userMap.get(id);
-        userProfile.setName(name);
-        userProfile.setPhone(phone);
-        userProfile.setAddress(address);*/
-        mapper.updatetUserProfile(id,name,phone,address);
+        mapper.insertUserProfile(id,name,phone,address);
     }
 
     @DeleteMapping("/user/{id}")
     public void deleteUserProfile(@PathVariable("id") String id){
-        //userMap.remove(id);
         mapper.deleteUserProfile(id);
     }
 

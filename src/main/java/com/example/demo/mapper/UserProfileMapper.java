@@ -8,8 +8,6 @@ import java.util.List;
 @Mapper
 //스프링부트가 Mapper라고 인식
 public interface UserProfileMapper {
-    //아니 왜 인터페이스지.. 난 클래스만들엇다가 지웠음
-    //당근 클래스일줄..
 
     @Select("Select * FROM UserProfile WHERE id= #{id}")
     //API를 매핑할 SQL문 작성
@@ -26,7 +24,7 @@ public interface UserProfileMapper {
     //영향을 받은 레코드의 수가 반환됨
 
     @Update("UPDATE UserProfile SET name=#{name}, phone=#{phone}, address= #{address} WHERE id = #{id}")
-    int updatetUserProfile(@Param("id") String id, @Param("name") String name, @Param("phone") String phone, @Param("address") String address);
+    int updateUserProfile(@Param("id") String id, @Param("name") String name, @Param("phone") String phone, @Param("address") String address);
     //영향을 받은 레코드의 수가 반환됨
 
     @Delete("DELETE FROM UserProfile WHERE id=#{id}")
